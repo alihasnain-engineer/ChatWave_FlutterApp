@@ -8,37 +8,29 @@ class AddChatScreen extends StatefulWidget {
 }
 
 class _AddChatScreenState extends State<AddChatScreen> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _name = TextEditingController();
 
   void _save() {
-    final text = _controller.text.trim();
-    if (text.isEmpty) return;
-    Navigator.pop(context, text);
+    final n = _name.text.trim();
+    if (n.isEmpty) return;
+    Navigator.of(context).pop(n);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('New Chat',  style: TextStyle(color: Colors.white),) , backgroundColor: Colors.indigo),
+      appBar: AppBar(title: const Text('New Chat'), backgroundColor: const Color(0xFF6A11CB)),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18.0),
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                  labelText: 'Chat Name',
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
-            ),
+            TextField(controller: _name, decoration: InputDecoration(labelText: 'Contact or group name', border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)))),
             const SizedBox(height: 16),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _save,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigo,
-                minimumSize: const Size.fromHeight(46),
-              ),
-              child: const Text('Create Chat',style: TextStyle(color: Colors.white),),
+              icon: const Icon(Icons.check),
+              label: const Text('Create Chat'),
+              style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(46), backgroundColor: const Color(0xFF6A11CB)),
             )
           ],
         ),
